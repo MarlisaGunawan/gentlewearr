@@ -1,0 +1,13 @@
+{
+  "name": "gentle-wear-n8n",
+  "private": true,
+  "description": "n8n automation for Gentle Wear: order notifications, low-stock alerts, daily sales recap",
+  "scripts": {
+    "start": "node start.mjs",
+    "import": "node start.mjs import",
+    "activate": "node start.mjs activate"
+  },
+  "dependencies": {
+    "n8n": "2.8.4"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "id": "gwLowStock000001",
+  "name": "Gentle Wear · Low stock alert",
+  "active": false,
+  "nodes": [
+    {
+      "id": "fd339499-6e7c-54e8-8212-6572e9980411",
+      "name": "Low stock (from Laravel)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "a5ba507f-6418-5cbc-9c5c-c77bf4d5c3c7",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "gentle-wear/stock-low",
+        "responseMode": "onReceived",
+        "options": {}
+      }
+    },
+    {
+      "id": "e24237c4-0e75-5f07-bb23-a67984fa64a0",
+      "name": "Alert warehouse (Telegram)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        -100
+      ],
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot{{ $env.TELEGRAM_BOT_TOKEN }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ chat_id: $env.TELEGRAM_CHAT_ID, parse_mode: \"HTML\", text: `⚠️ <b>Low stock</b>\n${ $('Low stock (from Laravel)').item.json.body.product } — ${ $('Low stock (from Laravel)').item.json.body.color } ${ $('Low stock (from Laravel)').item.json.body.size }\nOnly <b>${ $('Low stock (from Laravel)').item.json.body.stock }</b> left (minimum ${ $('Low stock (from Laravel)').item.json.body.min_stock })\nSKU: ${ $('Low stock (from Laravel)').item.json.body.sku }` }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "0077e829-ea4b-5455-9ba2-c91b3db2d943",
+      "name": "Alert warehouse (email)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        100
+      ],
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.brevo.com/v3/smtp/email",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ sender: { name: $env.SHOP_NAME || \"Gentle Wear\", email: $env.SHOP_EMAIL }, to: [ { email: `${ $env.NOTIFY_EMAIL }` } ], subject: `Low stock: ${ $('Low stock (from Laravel)').item.json.body.product } ${ $('Low stock (from Laravel)').item.json.body.color } ${ $('Low stock (from Laravel)').item.json.body.size } (${ $('Low stock (from Laravel)').item.json.body.stock } left)`, htmlContent: `<p>Restock soon:</p><p><b>${ $('Low stock (from Laravel)').item.json.body.product }</b> — ${ $('Low stock (from Laravel)').item.json.body.color } ${ $('Low stock (from Laravel)').item.json.body.size }<br>Stock: <b>${ $('Low stock (from Laravel)').item.json.body.stock }</b> (minimum ${ $('Low stock (from Laravel)').item.json.body.min_stock })<br>SKU: ${ $('Low stock (from Laravel)').item.json.body.sku }</p>` }) }}",
+        "options": {},
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api-key",
+              "value": "={{ $env.BREVO_API_KEY }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Low stock (from Laravel)": {
+      "main": [
+        [
+          {
+            "node": "Alert warehouse (Telegram)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Alert warehouse (email)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Jakarta"
+  },
+  "pinData": {},
+  "tags": []
+}

@@ -1,0 +1,584 @@
+/* =========================================================
+   STAGE + MEDIA
+   Layers: media 0 · hero copy 10 · controller 20 · header 30 · notice 40
+   ========================================================= */
+
+.stage {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: #000;
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* Set from JS by the player: exactly one video is visible at a time. */
+.media[data-visible='true'] {
+  visibility: visible;
+}
+
+/* =========================================================
+   HERO COPY
+   ========================================================= */
+
+.hero {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  text-align: center;
+}
+
+.hero__title {
+  position: absolute;
+  top: 35.9%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(901px, calc(100vw - 48px));
+  font-size: clamp(62px, 6.8vw, 100px);
+  font-weight: 500;
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  text-shadow: 0 2px 12px rgb(0 0 0 / 0.14);
+}
+
+.hero__title span {
+  display: inline-block;
+  transition:
+    opacity 900ms var(--retake-ease),
+    filter 900ms var(--retake-ease),
+    transform 900ms var(--retake-ease);
+}
+
+.hero__title span:nth-child(2) {
+  transition-delay: 90ms;
+}
+
+.hero__title span:nth-child(3) {
+  transition-delay: 180ms;
+}
+
+.stage.title-hidden .hero__title span {
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateY(-10px);
+}
+
+.hero__text {
+  position: absolute;
+  top: calc(46.78% + 94px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(734px, calc(100vw - 48px));
+  font-size: clamp(14px, 1.25vw, 18px);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.16);
+}
+
+/* =========================================================
+   CONTROLLER — layout
+   ========================================================= */
+
+.controller {
+  position: absolute;
+  top: 46.78%;
+  left: 50%;
+  z-index: 20;
+  transform: translateX(-50%);
+  width: min(880px, calc(100vw - 48px));
+  height: 72px;
+}
+
+.track {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  border-radius: 999px;
+  transition:
+    opacity 400ms linear,
+    left 980ms var(--retake-slow-ease),
+    width 980ms var(--retake-slow-ease);
+}
+
+.track__dividers {
+  display: none;
+}
+
+/* The capsule's position comes from CSS variables (set by React), never inline
+   left/width — otherwise the .collapsed rule below could not override it. */
+.capsule {
+  position: absolute;
+  top: -1px; /* = -5px relative to the track (which sits at 4px) */
+  left: var(--cap-left, -5px);
+  width: var(--cap-width, calc(20% + 5px));
+  height: 72px;
+  border-radius: 999px;
+  transition:
+    left 620ms var(--retake-ease),
+    width 620ms var(--retake-ease),
+    opacity 420ms var(--retake-ease),
+    background-color 980ms var(--retake-slow-ease);
+}
+
+/* Invisible box with the collapsed capsule's geometry — used to measure
+   where the chosen label should travel to. */
+.capsule-anchor {
+  position: absolute;
+  top: -1px;
+  left: calc(50% - 100px);
+  width: 200px;
+  height: 72px;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.cells {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 14px;
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  transition:
+    opacity 420ms var(--retake-ease),
+    filter 420ms var(--retake-ease),
+    transform 980ms var(--retake-slow-ease);
+}
+
+button.cell {
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+}
+
+button.cell:disabled {
+  cursor: default;
+}
+
+button.cell.is-loading {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.cell--label {
+  transition:
+    opacity 300ms var(--retake-ease),
+    filter 420ms var(--retake-ease),
+    transform 980ms var(--retake-slow-ease);
+}
+
+.cell--label.is-dimmed {
+  opacity: 0.5;
+}
+
+/* Label text and "Reset" are stacked in the same spot and cross-fade. */
+button.cell {
+  display: grid;
+  place-items: center;
+}
+
+.cell__text,
+.cell__reset {
+  grid-area: 1 / 1;
+}
+
+.cell__text {
+  transition:
+    opacity 760ms var(--retake-ease) 60ms,
+    filter 760ms var(--retake-ease) 60ms;
+}
+
+.cell__reset {
+  opacity: 0;
+  filter: blur(10px);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition:
+    opacity 520ms var(--retake-ease),
+    filter 520ms var(--retake-ease);
+}
+
+.cell.show-reset .cell__text {
+  opacity: 0;
+  filter: blur(10px);
+}
+
+.cell.show-reset .cell__reset {
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* =========================================================
+   CONTROLLER — collapsed (forward + selected) and reversing
+   ========================================================= */
+
+.controller.collapsed .capsule {
+  left: calc(50% - 100px);
+  width: 200px;
+  background-color: rgb(246 251 255 / 0.14);
+  transition:
+    left 980ms var(--retake-slow-ease),
+    width 980ms var(--retake-slow-ease),
+    opacity 420ms var(--retake-ease),
+    background-color 980ms var(--retake-slow-ease);
+}
+
+.controller.reversing .capsule {
+  transition:
+    left 980ms var(--retake-slow-ease),
+    width 980ms var(--retake-slow-ease),
+    opacity 420ms var(--retake-ease),
+    background-color 980ms var(--retake-slow-ease);
+}
+
+/* The rear bar narrows with the capsule, then fades only after the collapse
+   (650ms CSS delay — no setTimeout, so it can never race a failure). */
+.controller.collapsed .track {
+  left: calc(50% - 96px);
+  width: 192px;
+  opacity: 0;
+  transition:
+    opacity 400ms linear 650ms,
+    left 980ms var(--retake-slow-ease),
+    width 980ms var(--retake-slow-ease);
+}
+
+.controller.collapsed .cell.is-faded {
+  opacity: 0;
+  filter: blur(10px);
+  transform: scale(0.94);
+  pointer-events: none;
+}
+
+.cell.is-travelling {
+  transform: translate(var(--dx, 0), var(--dy, 0));
+}
+
+.controller.reversing .cell {
+  transition:
+    opacity 760ms var(--retake-ease) 60ms,
+    filter 760ms var(--retake-ease) 60ms,
+    transform 980ms var(--retake-slow-ease);
+}
+
+/* =========================================================
+   GLASS MATERIAL
+   ========================================================= */
+
+.glass::before,
+.glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Broad soft highlight that follows the pointer (--glass-x / --glass-y). */
+.glass::before {
+  background:
+    radial-gradient(
+      120% 150% at var(--glass-x, 24%) var(--glass-y, 8%),
+      rgb(255 255 255 / 0.25),
+      rgb(255 255 255 / 0) 53%
+    ),
+    linear-gradient(115deg, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0) 42%);
+}
+
+/* Thin 1px tinted edge, drawn with a mask so only the border shows. */
+.glass::after {
+  padding: 1px;
+  background: conic-gradient(
+    from 225deg,
+    #7fe3ff,
+    rgb(255 255 255 / 0.35),
+    #ffffff,
+    #ffd7e6,
+    rgb(255 255 255 / 0.35),
+    #7fe3ff
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.track {
+  background: rgb(24 55 82 / 0.31);
+  border: 1px solid rgb(255 255 255 / 0.2);
+  -webkit-backdrop-filter: blur(9px) saturate(126%) contrast(108%) brightness(103%);
+  backdrop-filter: blur(9px) saturate(126%) contrast(108%) brightness(103%);
+  box-shadow:
+    0 14px 38px rgb(4 24 43 / 0.16),
+    0 2px 7px rgb(4 24 43 / 0.1),
+    inset 1px 1px 0 rgb(255 255 255 / 0.48),
+    inset -1px -1px 0 rgb(21 49 73 / 0.14),
+    inset 0 0 0 0.5px rgb(255 255 255 / 0.16);
+}
+
+.track::after {
+  opacity: 0.27;
+}
+
+.capsule {
+  background-color: rgb(246 251 255 / 0.24);
+  border: 1px solid rgb(255 255 255 / 0.28);
+  -webkit-backdrop-filter: blur(13px) saturate(128%) contrast(107%) brightness(105%);
+  backdrop-filter: blur(13px) saturate(128%) contrast(107%) brightness(105%);
+  box-shadow:
+    0 11px 28px rgb(4 24 43 / 0.17),
+    0 2px 6px rgb(4 24 43 / 0.1),
+    inset 1px 1px 0 rgb(255 255 255 / 0.62),
+    inset -1px -1px 0 rgb(20 49 73 / 0.18),
+    inset 0 0 12px rgb(255 255 255 / 0.055);
+}
+
+.capsule::after {
+  opacity: 0.3;
+}
+
+/* =========================================================
+   ERROR NOTICE
+   ========================================================= */
+
+.notice {
+  position: absolute;
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  left: 50%;
+  z-index: 40;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: calc(100vw - 32px);
+  padding: 10px 10px 10px 20px;
+  border: 1px solid rgb(255 255 255 / 0.25);
+  border-radius: 999px;
+  background: rgb(24 55 82 / 0.55);
+  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
+  font-size: 14px;
+}
+
+.notice button {
+  min-height: 36px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: #0b1a26;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .cell {
+    font-size: clamp(17px, 2.5vw, 24px);
+  }
+}
+
+@media (max-width: 700px) {
+  /* Two lines across the chest, never over the face. */
+  .hero__title {
+    top: 34%;
+    width: calc(100vw - 40px);
+    font-size: clamp(48px, 14vw, 64px);
+    line-height: 0.88;
+    white-space: normal;
+  }
+
+  .hero__text {
+    top: 77%;
+    width: calc(100vw - 44px);
+    font-size: 14px;
+  }
+
+  .controller {
+    --row-1: 48px;
+    --row-2: 54px;
+    top: 53%;
+    width: calc(100vw - 40px);
+    height: 156px;
+  }
+
+  .track {
+    top: 0;
+    height: 100%;
+    border-radius: 28px;
+  }
+
+  .track__dividers {
+    display: block;
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+      linear-gradient(rgb(255 255 255 / 0.12), rgb(255 255 255 / 0.12)) 0 var(--row-1) / 100% 1px
+        no-repeat,
+      linear-gradient(rgb(255 255 255 / 0.12), rgb(255 255 255 / 0.12)) 0
+        calc(var(--row-1) + var(--row-2)) / 100% 1px no-repeat,
+      linear-gradient(rgb(255 255 255 / 0.12), rgb(255 255 255 / 0.12)) 50% var(--row-1) / 1px
+        100% no-repeat;
+  }
+
+  .cells {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: var(--row-1) var(--row-2) var(--row-2);
+  }
+
+  .cell {
+    padding: 0 10px;
+    font-size: 17px;
+  }
+
+  .cell--label {
+    grid-column: 1 / -1;
+  }
+
+  button.cell {
+    border-radius: 20px;
+  }
+
+  button.cell:focus-visible {
+    outline-offset: -3px;
+  }
+
+  button.cell:active:not(:disabled) {
+    background: rgb(255 255 255 / 0.08);
+  }
+
+  /* No sliding hover capsule on phones. */
+  .capsule {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Collapsed: one small glass pill. Positioned from the controller's own top
+     (not position:fixed — the transformed controller would be its container). */
+  .controller.collapsed .capsule,
+  .capsule-anchor {
+    top: calc(4vh - 32px);
+    top: calc(4dvh - 32px);
+    left: calc(50% - 98px);
+    width: 196px;
+    height: 64px;
+  }
+
+  .controller.collapsed .capsule {
+    opacity: 1;
+    background-color: rgb(246 251 255 / 0.18);
+  }
+}
+
+/* Short phones, e.g. 320×568 */
+@media (max-width: 700px) and (max-height: 700px) {
+  .controller {
+    top: 50%;
+  }
+
+  .hero__text {
+    top: calc(50% + 168px);
+    width: calc(100vw - 32px);
+    font-size: 13px;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .hero__title {
+    top: 20%;
+    font-size: clamp(34px, 8vh, 56px);
+  }
+
+  .controller {
+    top: 50%;
+  }
+
+  .hero__text {
+    top: auto;
+    bottom: 8px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 700px) and (max-height: 520px) and (orientation: landscape) {
+  .hero__title {
+    top: 12%;
+    font-size: clamp(28px, 7vh, 44px);
+  }
+
+  .controller {
+    --row-1: 36px;
+    --row-2: 41px;
+    top: 46%;
+    height: 118px;
+  }
+
+  .cell {
+    font-size: 15px;
+  }
+
+  .hero__text {
+    bottom: 6px;
+    font-size: 12px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .capsule,
+  .track,
+  .cell,
+  .cell__text,
+  .cell__reset,
+  .hero__title span {
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .stage.title-hidden .hero__title span,
+  .controller.collapsed .cell.is-faded,
+  .cell__reset,
+  .cell.show-reset .cell__text {
+    filter: none;
+  }
+}

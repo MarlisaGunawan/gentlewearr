@@ -1,0 +1,99 @@
+{
+  "id": "gwOrderPaid00001",
+  "name": "Gentle Wear · Order paid",
+  "active": false,
+  "nodes": [
+    {
+      "id": "a4df589a-0fcb-5c79-8be5-c84c794d5989",
+      "name": "Order paid (from Laravel)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "7b822d6e-78d5-53cb-a695-50e2d75391ec",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "gentle-wear/order-paid",
+        "responseMode": "onReceived",
+        "options": {}
+      }
+    },
+    {
+      "id": "02d998d4-0c17-5d86-b28f-b883e8bc2325",
+      "name": "Tell admin (Telegram)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        -100
+      ],
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot{{ $env.TELEGRAM_BOT_TOKEN }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ chat_id: $env.TELEGRAM_CHAT_ID, parse_mode: \"HTML\", text: `🛍️ <b>New paid order ${ $('Order paid (from Laravel)').item.json.body.order_code }</b>\n${ $('Order paid (from Laravel)').item.json.body.customer_name } · ${ $('Order paid (from Laravel)').item.json.body.total_label }\n\n${ $('Order paid (from Laravel)').item.json.body.items.join(\"\\n\") }\n\n📦 ${ $('Order paid (from Laravel)').item.json.body.ship_to }` }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "f8c14a3f-1fbc-5b02-9328-053ba9886916",
+      "name": "Thank the customer (email)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        100
+      ],
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.brevo.com/v3/smtp/email",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ sender: { name: $env.SHOP_NAME || \"Gentle Wear\", email: $env.SHOP_EMAIL }, to: [ { email: `${ $('Order paid (from Laravel)').item.json.body.customer_email }` } ], subject: `Thank you! Order ${ $('Order paid (from Laravel)').item.json.body.order_code } is confirmed`, htmlContent: `<div style=\"font-family:Arial,sans-serif;color:#1f1c19;max-width:520px\"><h2 style=\"margin:0 0 8px\">Thank you, ${ $('Order paid (from Laravel)').item.json.body.customer_name }!</h2><p>We received your payment of <b>${ $('Order paid (from Laravel)').item.json.body.total_label }</b> for order <b>${ $('Order paid (from Laravel)').item.json.body.order_code }</b>.</p><p>${ $('Order paid (from Laravel)').item.json.body.items.join(\"<br>\") }</p><p style=\"color:#776d64\">Shipping to: ${ $('Order paid (from Laravel)').item.json.body.ship_to }</p><p>We will email you the tracking number as soon as it ships.<br>— Gentle Wear</p></div>` }) }}",
+        "options": {},
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api-key",
+              "value": "={{ $env.BREVO_API_KEY }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Order paid (from Laravel)": {
+      "main": [
+        [
+          {
+            "node": "Tell admin (Telegram)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Thank the customer (email)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Jakarta"
+  },
+  "pinData": {},
+  "tags": []
+}

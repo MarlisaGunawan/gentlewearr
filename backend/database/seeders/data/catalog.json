@@ -1,0 +1,1444 @@
+{
+  "categories": [
+    {
+      "slug": "t-shirts",
+      "name": "T-Shirts",
+      "title": "The Everyday Tee Edit",
+      "description": "Heavy cotton, clean necklines and easy fits. The tees you reach for first, every single day."
+    },
+    {
+      "slug": "shirts",
+      "name": "Shirts",
+      "title": "The Office Shirt Edit",
+      "description": "Crisp oxfords and poplins cut slim enough for meetings and relaxed enough for after."
+    },
+    {
+      "slug": "knitwear",
+      "name": "Knitwear",
+      "title": "Soft Knit & Fleece",
+      "description": "Warm, soft and easy layers for cool mornings, long flights and slow weekends."
+    },
+    {
+      "slug": "jackets",
+      "name": "Jackets",
+      "title": "Modern Outerwear Set",
+      "description": "Leather, satin and tailored layers that finish every outfit — from city nights to weddings."
+    },
+    {
+      "slug": "trousers",
+      "name": "Trousers",
+      "title": "Denim & Chino Edit",
+      "description": "Straight and relaxed cuts in sturdy denim and soft cotton twill, made to wear in."
+    }
+  ],
+  "products": [
+    {
+      "sku": "gw-101",
+      "code": "GW-#101",
+      "category": "T-Shirts",
+      "name": "Everyday crew tee — White, 220 gsm combed cotton",
+      "line": "Gentle Basics / featured",
+      "description": "Our best-selling crew tee in heavy 220 gsm combed cotton. Holds its shape wash after wash.",
+      "price": 149000,
+      "badge": null,
+      "image": "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 0,
+      "hotspots": [
+        {
+          "x": 50,
+          "y": 44,
+          "title": "Ribbed crew neck",
+          "text": "Keeps its shape wash after wash"
+        },
+        {
+          "x": 38,
+          "y": 60,
+          "title": "220 gsm cotton",
+          "text": "Heavy, combed and soft"
+        },
+        {
+          "x": 80,
+          "y": 50,
+          "title": "Taped shoulders",
+          "text": "No stretching at the seams"
+        }
+      ],
+      "colors": [
+        {
+          "name": "White",
+          "hex": "#f4f2ee",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 4
+            },
+            {
+              "size": "M",
+              "stock": 11
+            },
+            {
+              "size": "L",
+              "stock": 10
+            },
+            {
+              "size": "XL",
+              "stock": 5
+            },
+            {
+              "size": "XXL",
+              "stock": 9
+            }
+          ]
+        },
+        {
+          "name": "Black",
+          "hex": "#1f1c19",
+          "image": "/products/gw-101-black.jpg",
+          "variants": [
+            {
+              "size": "S",
+              "stock": 11
+            },
+            {
+              "size": "M",
+              "stock": 5
+            },
+            {
+              "size": "L",
+              "stock": 4
+            },
+            {
+              "size": "XL",
+              "stock": 4
+            },
+            {
+              "size": "XXL",
+              "stock": 5
+            }
+          ]
+        },
+        {
+          "name": "Sand",
+          "hex": "#d8c3a5",
+          "image": "/products/gw-101-sand.jpg",
+          "variants": [
+            {
+              "size": "S",
+              "stock": 0
+            },
+            {
+              "size": "M",
+              "stock": 7
+            },
+            {
+              "size": "L",
+              "stock": 6
+            },
+            {
+              "size": "XL",
+              "stock": 0
+            },
+            {
+              "size": "XXL",
+              "stock": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-102",
+      "code": "GW-#102",
+      "category": "T-Shirts",
+      "name": "Ringer tee with contrast trim — Black and grey",
+      "line": "Gentle Basics / latest",
+      "description": "A retro ringer with grey contrast trim at the neck and sleeves.",
+      "price": 169000,
+      "badge": "copy",
+      "image": "https://images.unsplash.com/photo-1622519407650-3df9883f76a5?w=900&q=75&auto=format&fit=crop",
+      "sold_out": true,
+      "sort": 1,
+      "hotspots": [
+        {
+          "x": 52,
+          "y": 31,
+          "title": "Contrast trim",
+          "text": "Retro ringer neck and cuffs"
+        },
+        {
+          "x": 50,
+          "y": 56,
+          "title": "Soft jersey",
+          "text": "180 gsm, light and breathable"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Black",
+          "hex": "#1f1c19",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 0
+            },
+            {
+              "size": "M",
+              "stock": 0
+            },
+            {
+              "size": "L",
+              "stock": 0
+            },
+            {
+              "size": "XL",
+              "stock": 0
+            },
+            {
+              "size": "XXL",
+              "stock": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-111",
+      "code": "GW-#111",
+      "category": "T-Shirts",
+      "name": "Graphic tee \"Peace\" — Washed black",
+      "line": "T-Shirts / latest",
+      "description": "Soft washed cotton with a hand-drawn peace print on the chest.",
+      "price": 179000,
+      "badge": null,
+      "image": "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 2,
+      "hotspots": [
+        {
+          "x": 53,
+          "y": 43,
+          "title": "Hand-drawn print",
+          "text": "Water-based ink, soft to touch"
+        },
+        {
+          "x": 50,
+          "y": 27,
+          "title": "Washed cotton",
+          "text": "Lived-in feel from day one"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Washed black",
+          "hex": "#2b2826",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 10
+            },
+            {
+              "size": "M",
+              "stock": 4
+            },
+            {
+              "size": "L",
+              "stock": 3
+            },
+            {
+              "size": "XL",
+              "stock": 12
+            },
+            {
+              "size": "XXL",
+              "stock": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-112",
+      "code": "GW-#112",
+      "category": "T-Shirts",
+      "name": "Pure cotton boxy tee — Optic white",
+      "line": "T-Shirts / offers",
+      "description": "A wider, boxy cut with dropped shoulders for a relaxed look.",
+      "price": 149000,
+      "badge": null,
+      "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 3,
+      "hotspots": [
+        {
+          "x": 50,
+          "y": 12,
+          "title": "Clean neckline",
+          "text": "Narrow rib, sits flat"
+        },
+        {
+          "x": 27,
+          "y": 30,
+          "title": "Dropped shoulders",
+          "text": "Relaxed, boxy silhouette"
+        },
+        {
+          "x": 50,
+          "y": 58,
+          "title": "Pure cotton",
+          "text": "100% cotton jersey"
+        }
+      ],
+      "colors": [
+        {
+          "name": "White",
+          "hex": "#f4f2ee",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 11
+            },
+            {
+              "size": "M",
+              "stock": 5
+            },
+            {
+              "size": "L",
+              "stock": 4
+            },
+            {
+              "size": "XL",
+              "stock": 0
+            },
+            {
+              "size": "XXL",
+              "stock": 10
+            }
+          ]
+        },
+        {
+          "name": "Olive",
+          "hex": "#7d9066",
+          "image": "/products/gw-112-olive.jpg",
+          "variants": [
+            {
+              "size": "S",
+              "stock": 11
+            },
+            {
+              "size": "M",
+              "stock": 5
+            },
+            {
+              "size": "L",
+              "stock": 4
+            },
+            {
+              "size": "XL",
+              "stock": 7
+            },
+            {
+              "size": "XXL",
+              "stock": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-113",
+      "code": "GW-#113",
+      "category": "T-Shirts",
+      "name": "Heavyweight logo tee — Black",
+      "line": "T-Shirts / latest",
+      "description": "Thick cotton jersey with a small embroidered Gentle Wear badge.",
+      "price": 159000,
+      "badge": "featured",
+      "image": "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 4,
+      "hotspots": [
+        {
+          "x": 78,
+          "y": 45,
+          "title": "Embroidered badge",
+          "text": "Small Gentle Wear crest"
+        },
+        {
+          "x": 36,
+          "y": 62,
+          "title": "Heavyweight jersey",
+          "text": "240 gsm, holds its shape"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Black",
+          "hex": "#1f1c19",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 0
+            },
+            {
+              "size": "M",
+              "stock": 7
+            },
+            {
+              "size": "L",
+              "stock": 6
+            },
+            {
+              "size": "XL",
+              "stock": 2
+            },
+            {
+              "size": "XXL",
+              "stock": 11
+            }
+          ]
+        },
+        {
+          "name": "Peach",
+          "hex": "#d6a283",
+          "image": "/products/gw-113-peach.jpg",
+          "variants": [
+            {
+              "size": "S",
+              "stock": 3
+            },
+            {
+              "size": "M",
+              "stock": 10
+            },
+            {
+              "size": "L",
+              "stock": 9
+            },
+            {
+              "size": "XL",
+              "stock": 9
+            },
+            {
+              "size": "XXL",
+              "stock": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-105",
+      "code": "GW-#105",
+      "category": "Shirts",
+      "name": "Slim oxford shirt with mini print — Denim blue",
+      "line": "Office Line / featured",
+      "description": "Oxford cotton with a tiny dot print. Button-down collar, slim fit.",
+      "price": 279000,
+      "badge": null,
+      "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 5,
+      "hotspots": [
+        {
+          "x": 50,
+          "y": 30,
+          "title": "Button-down collar",
+          "text": "Stays neat without a tie"
+        },
+        {
+          "x": 38,
+          "y": 62,
+          "title": "Mini dot oxford",
+          "text": "Woven cotton with a tiny print"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Denim blue",
+          "hex": "#4f6d8f",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 7
+            },
+            {
+              "size": "M",
+              "stock": 0
+            },
+            {
+              "size": "L",
+              "stock": 0
+            },
+            {
+              "size": "XL",
+              "stock": 4
+            },
+            {
+              "size": "XXL",
+              "stock": 0
+            }
+          ]
+        },
+        {
+          "name": "White",
+          "hex": "#f4f2ee",
+          "image": "/products/gw-105-white.jpg",
+          "variants": [
+            {
+              "size": "S",
+              "stock": 0
+            },
+            {
+              "size": "M",
+              "stock": 8
+            },
+            {
+              "size": "L",
+              "stock": 7
+            },
+            {
+              "size": "XL",
+              "stock": 5
+            },
+            {
+              "size": "XXL",
+              "stock": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-121",
+      "code": "GW-#121",
+      "category": "Shirts",
+      "name": "Cotton dress shirts, 3-pack — Mixed",
+      "line": "Office Line / latest",
+      "description": "Three easy-iron dress shirts: navy, white and burgundy.",
+      "price": 459000,
+      "badge": "featured",
+      "image": "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 6,
+      "hotspots": [
+        {
+          "x": 56,
+          "y": 46,
+          "title": "Easy-iron cotton",
+          "text": "Smooth out of the wash"
+        },
+        {
+          "x": 76,
+          "y": 72,
+          "title": "Three colours",
+          "text": "Navy, white and burgundy"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Mixed",
+          "hex": "#8a7f86",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 5
+            },
+            {
+              "size": "M",
+              "stock": 8
+            },
+            {
+              "size": "L",
+              "stock": 7
+            },
+            {
+              "size": "XL",
+              "stock": 9
+            },
+            {
+              "size": "XXL",
+              "stock": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-122",
+      "code": "GW-#122",
+      "category": "Shirts",
+      "name": "Waistcoat and shirt set — Charcoal",
+      "line": "Tailoring / offers",
+      "description": "A matching waistcoat with a crisp white shirt — instant smart look.",
+      "price": 559000,
+      "badge": null,
+      "image": "https://images.unsplash.com/photo-1504593811423-6dd665756598?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 7,
+      "hotspots": [
+        {
+          "x": 45,
+          "y": 66,
+          "title": "Matching waistcoat",
+          "text": "Five-button, fitted back"
+        },
+        {
+          "x": 62,
+          "y": 48,
+          "title": "Crisp poplin shirt",
+          "text": "Included in the set"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Charcoal",
+          "hex": "#3d3f45",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 9
+            },
+            {
+              "size": "M",
+              "stock": 3
+            },
+            {
+              "size": "L",
+              "stock": 2
+            },
+            {
+              "size": "XL",
+              "stock": 0
+            },
+            {
+              "size": "XXL",
+              "stock": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-123",
+      "code": "GW-#123",
+      "category": "Shirts",
+      "name": "Black poplin shirt — Midnight",
+      "line": "Shirts / latest",
+      "description": "Smooth cotton poplin with a hidden button placket.",
+      "price": 299000,
+      "badge": null,
+      "image": "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 8,
+      "hotspots": [
+        {
+          "x": 52,
+          "y": 52,
+          "title": "Hidden placket",
+          "text": "Buttons tucked out of sight"
+        },
+        {
+          "x": 36,
+          "y": 70,
+          "title": "Smooth poplin",
+          "text": "Pairs with tailoring"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Black",
+          "hex": "#1f1c19",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 3
+            },
+            {
+              "size": "M",
+              "stock": 10
+            },
+            {
+              "size": "L",
+              "stock": 9
+            },
+            {
+              "size": "XL",
+              "stock": 7
+            },
+            {
+              "size": "XXL",
+              "stock": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-103",
+      "code": "GW-#103",
+      "category": "Knitwear",
+      "name": "Soft knit crewneck sweater — Dusty pink",
+      "line": "Knit Studio / offers",
+      "description": "A soft cotton-blend knit with ribbed cuffs and hem.",
+      "price": 329000,
+      "badge": null,
+      "image": "https://images.unsplash.com/photo-1516826957135-700dedea698c?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 9,
+      "hotspots": [
+        {
+          "x": 36,
+          "y": 27,
+          "title": "Cotton-blend knit",
+          "text": "Soft, never itchy"
+        },
+        {
+          "x": 40,
+          "y": 40,
+          "title": "Ribbed hem & cuffs",
+          "text": "Keeps the shape in place"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Dusty pink",
+          "hex": "#e2c2c6",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 2
+            },
+            {
+              "size": "M",
+              "stock": 9
+            },
+            {
+              "size": "L",
+              "stock": 8
+            },
+            {
+              "size": "XL",
+              "stock": 9
+            },
+            {
+              "size": "XXL",
+              "stock": 11
+            }
+          ]
+        },
+        {
+          "name": "Cream",
+          "hex": "#efe6d8",
+          "image": "/products/gw-103-cream.jpg",
+          "variants": [
+            {
+              "size": "S",
+              "stock": 2
+            },
+            {
+              "size": "M",
+              "stock": 9
+            },
+            {
+              "size": "L",
+              "stock": 8
+            },
+            {
+              "size": "XL",
+              "stock": 5
+            },
+            {
+              "size": "XXL",
+              "stock": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-131",
+      "code": "GW-#131",
+      "category": "Knitwear",
+      "name": "Shawl-collar cardigan — Charcoal",
+      "line": "Knitwear / latest",
+      "description": "Chunky knit cardigan with a wide shawl collar and wooden buttons.",
+      "price": 489000,
+      "badge": "featured",
+      "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 10,
+      "hotspots": [
+        {
+          "x": 50,
+          "y": 86,
+          "title": "Shawl collar",
+          "text": "Wide, cosy and structured"
+        },
+        {
+          "x": 28,
+          "y": 80,
+          "title": "Chunky knit",
+          "text": "Warm wool-blend yarn"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Charcoal",
+          "hex": "#4a4744",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 0
+            },
+            {
+              "size": "M",
+              "stock": 8
+            },
+            {
+              "size": "L",
+              "stock": 7
+            },
+            {
+              "size": "XL",
+              "stock": 3
+            },
+            {
+              "size": "XXL",
+              "stock": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-132",
+      "code": "GW-#132",
+      "category": "Knitwear",
+      "name": "Brushed fleece hoodie — Heather grey",
+      "line": "Weekend / featured",
+      "description": "Brushed inside for warmth, with a roomy hood and kangaroo pocket.",
+      "price": 359000,
+      "badge": null,
+      "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 11,
+      "hotspots": [
+        {
+          "x": 50,
+          "y": 22,
+          "title": "Roomy hood",
+          "text": "Lined, with no drawcord to snag"
+        },
+        {
+          "x": 50,
+          "y": 56,
+          "title": "Brushed fleece",
+          "text": "Soft inside, warm all day"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Heather grey",
+          "hex": "#a9a9a6",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 0
+            },
+            {
+              "size": "M",
+              "stock": 8
+            },
+            {
+              "size": "L",
+              "stock": 7
+            },
+            {
+              "size": "XL",
+              "stock": 5
+            },
+            {
+              "size": "XXL",
+              "stock": 12
+            }
+          ]
+        },
+        {
+          "name": "Sage",
+          "hex": "#7d9066",
+          "image": "/products/gw-132-sage.jpg",
+          "variants": [
+            {
+              "size": "S",
+              "stock": 9
+            },
+            {
+              "size": "M",
+              "stock": 3
+            },
+            {
+              "size": "L",
+              "stock": 2
+            },
+            {
+              "size": "XL",
+              "stock": 4
+            },
+            {
+              "size": "XXL",
+              "stock": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-104",
+      "code": "GW-#104",
+      "category": "Jackets",
+      "name": "Biker jacket in vegan leather — Jet black",
+      "line": "Outerwear / latest",
+      "description": "Asymmetric zip biker jacket in soft vegan leather.",
+      "price": 749000,
+      "badge": "featured",
+      "image": "https://images.unsplash.com/photo-1520975954732-35dd22299614?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 12,
+      "hotspots": [
+        {
+          "x": 45,
+          "y": 42,
+          "title": "Asymmetric zip",
+          "text": "Classic biker front"
+        },
+        {
+          "x": 68,
+          "y": 50,
+          "title": "Vegan leather",
+          "text": "Soft and animal-free"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Jet black",
+          "hex": "#141210",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 5
+            },
+            {
+              "size": "M",
+              "stock": 12
+            },
+            {
+              "size": "L",
+              "stock": 11
+            },
+            {
+              "size": "XL",
+              "stock": 0
+            },
+            {
+              "size": "XXL",
+              "stock": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-141",
+      "code": "GW-#141",
+      "category": "Jackets",
+      "name": "Satin bomber jacket — Rust orange",
+      "line": "Outerwear / offers",
+      "description": "Light satin bomber with ribbed collar, cuffs and hem.",
+      "price": 459000,
+      "badge": null,
+      "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 13,
+      "hotspots": [
+        {
+          "x": 50,
+          "y": 24,
+          "title": "Ribbed collar",
+          "text": "Classic bomber finish"
+        },
+        {
+          "x": 40,
+          "y": 52,
+          "title": "Light satin",
+          "text": "Smooth with a subtle sheen"
+        },
+        {
+          "x": 50,
+          "y": 80,
+          "title": "Ribbed hem",
+          "text": "Stays put at the waist"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Rust",
+          "hex": "#b5643c",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 5
+            },
+            {
+              "size": "M",
+              "stock": 8
+            },
+            {
+              "size": "L",
+              "stock": 7
+            },
+            {
+              "size": "XL",
+              "stock": 9
+            },
+            {
+              "size": "XXL",
+              "stock": 8
+            }
+          ]
+        },
+        {
+          "name": "Olive",
+          "hex": "#6b7350",
+          "image": "/products/gw-141-olive.jpg",
+          "variants": [
+            {
+              "size": "S",
+              "stock": 4
+            },
+            {
+              "size": "M",
+              "stock": 11
+            },
+            {
+              "size": "L",
+              "stock": 10
+            },
+            {
+              "size": "XL",
+              "stock": 5
+            },
+            {
+              "size": "XXL",
+              "stock": 9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-142",
+      "code": "GW-#142",
+      "category": "Jackets",
+      "name": "Classic leather jacket — Black",
+      "line": "Jackets / latest",
+      "description": "A timeless leather jacket that gets better with every wear.",
+      "price": 899000,
+      "badge": null,
+      "image": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 14,
+      "hotspots": [
+        {
+          "x": 40,
+          "y": 46,
+          "title": "Real leather",
+          "text": "Softens as you wear it"
+        },
+        {
+          "x": 60,
+          "y": 38,
+          "title": "Metal zips",
+          "text": "Heavy-duty and smooth"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Black",
+          "hex": "#141210",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 6
+            },
+            {
+              "size": "M",
+              "stock": 0
+            },
+            {
+              "size": "L",
+              "stock": 12
+            },
+            {
+              "size": "XL",
+              "stock": 9
+            },
+            {
+              "size": "XXL",
+              "stock": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-143",
+      "code": "GW-#143",
+      "category": "Jackets",
+      "name": "Everyday zip jacket — Graphite",
+      "line": "Jackets / latest",
+      "description": "Water-resistant shell with a soft lining, for daily commutes.",
+      "price": 529000,
+      "badge": null,
+      "image": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 15,
+      "hotspots": [
+        {
+          "x": 30,
+          "y": 82,
+          "title": "Water-resistant",
+          "text": "Shrugs off light rain"
+        },
+        {
+          "x": 62,
+          "y": 78,
+          "title": "Soft lining",
+          "text": "Comfortable over a tee"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Graphite",
+          "hex": "#3a3a3c",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 4
+            },
+            {
+              "size": "M",
+              "stock": 11
+            },
+            {
+              "size": "L",
+              "stock": 10
+            },
+            {
+              "size": "XL",
+              "stock": 10
+            },
+            {
+              "size": "XXL",
+              "stock": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-144",
+      "code": "GW-#144",
+      "category": "Jackets",
+      "name": "Slim suit jacket — Royal navy",
+      "line": "Tailoring / latest",
+      "description": "Two-button slim suit jacket in a light wool blend.",
+      "price": 949000,
+      "badge": null,
+      "image": "https://images.unsplash.com/photo-1617137968427-85924c800a22?w=900&q=75&auto=format&fit=crop",
+      "sold_out": true,
+      "sort": 16,
+      "hotspots": [
+        {
+          "x": 45,
+          "y": 42,
+          "title": "Two-button front",
+          "text": "Slim, modern cut"
+        },
+        {
+          "x": 45,
+          "y": 72,
+          "title": "Wool blend",
+          "text": "Light and breathable"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Navy",
+          "hex": "#24345a",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 0
+            },
+            {
+              "size": "M",
+              "stock": 0
+            },
+            {
+              "size": "L",
+              "stock": 0
+            },
+            {
+              "size": "XL",
+              "stock": 0
+            },
+            {
+              "size": "XXL",
+              "stock": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-106",
+      "code": "GW-#106",
+      "category": "Trousers",
+      "name": "Straight-fit raw denim jeans — Indigo",
+      "line": "Denim Lab / latest",
+      "description": "Rigid 13 oz denim that fades to your own shape.",
+      "price": 399000,
+      "badge": null,
+      "image": "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 17,
+      "hotspots": [
+        {
+          "x": 50,
+          "y": 8,
+          "title": "Rigid 13 oz denim",
+          "text": "Fades to your shape"
+        },
+        {
+          "x": 35,
+          "y": 56,
+          "title": "Straight leg",
+          "text": "Classic, easy fit"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Indigo",
+          "hex": "#2c3a55",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 11
+            },
+            {
+              "size": "M",
+              "stock": 5
+            },
+            {
+              "size": "L",
+              "stock": 4
+            },
+            {
+              "size": "XL",
+              "stock": 0
+            },
+            {
+              "size": "XXL",
+              "stock": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-151",
+      "code": "GW-#151",
+      "category": "Trousers",
+      "name": "Washed denim duo — Light and dark",
+      "line": "Denim Lab / offers",
+      "description": "Two pairs of everyday jeans in light and dark wash.",
+      "price": 649000,
+      "badge": "featured",
+      "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 18,
+      "hotspots": [
+        {
+          "x": 62,
+          "y": 22,
+          "title": "Two washes",
+          "text": "Light and dark in one pack"
+        },
+        {
+          "x": 40,
+          "y": 66,
+          "title": "Everyday denim",
+          "text": "Comfort stretch"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Light wash",
+          "hex": "#8ea3bd",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 6
+            },
+            {
+              "size": "M",
+              "stock": 0
+            },
+            {
+              "size": "L",
+              "stock": 12
+            },
+            {
+              "size": "XL",
+              "stock": 0
+            },
+            {
+              "size": "XXL",
+              "stock": 0
+            }
+          ]
+        },
+        {
+          "name": "Dark wash",
+          "hex": "#33415c",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 10
+            },
+            {
+              "size": "M",
+              "stock": 4
+            },
+            {
+              "size": "L",
+              "stock": 3
+            },
+            {
+              "size": "XL",
+              "stock": 11
+            },
+            {
+              "size": "XXL",
+              "stock": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sku": "gw-152",
+      "code": "GW-#152",
+      "category": "Trousers",
+      "name": "Relaxed cotton chino — Tan",
+      "line": "Trousers / latest",
+      "description": "Soft cotton twill chinos with a relaxed, tapered leg.",
+      "price": 349000,
+      "badge": null,
+      "image": "https://images.unsplash.com/photo-1488161628813-04466f872be2?w=900&q=75&auto=format&fit=crop",
+      "sold_out": false,
+      "sort": 19,
+      "hotspots": [
+        {
+          "x": 46,
+          "y": 72,
+          "title": "Cotton twill",
+          "text": "Soft and breathable"
+        },
+        {
+          "x": 57,
+          "y": 81,
+          "title": "Tapered leg",
+          "text": "Relaxed through the thigh"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Tan",
+          "hex": "#b58a5a",
+          "image": null,
+          "variants": [
+            {
+              "size": "S",
+              "stock": 10
+            },
+            {
+              "size": "M",
+              "stock": 4
+            },
+            {
+              "size": "L",
+              "stock": 3
+            },
+            {
+              "size": "XL",
+              "stock": 0
+            },
+            {
+              "size": "XXL",
+              "stock": 2
+            }
+          ]
+        },
+        {
+          "name": "Stone",
+          "hex": "#cfc6b6",
+          "image": "/products/gw-152-stone.jpg",
+          "variants": [
+            {
+              "size": "S",
+              "stock": 5
+            },
+            {
+              "size": "M",
+              "stock": 8
+            },
+            {
+              "size": "L",
+              "stock": 7
+            },
+            {
+              "size": "XL",
+              "stock": 9
+            },
+            {
+              "size": "XXL",
+              "stock": 8
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

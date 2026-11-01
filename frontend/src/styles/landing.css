@@ -1,0 +1,999 @@
+/* =========================================================
+   LANDING — sections below the hero
+   ========================================================= */
+
+.landing {
+  --page: #e9ddce;
+  --ink: #1f1c19;
+  --muted: #a29b93;
+  --line: #ebe5de;
+  --soft: #f0eeeb;
+
+  display: grid;
+  gap: 28px;
+  /* Side gutter grows with the screen; content stops at 1560px on big monitors. */
+  --gutter: max(clamp(24px, 4vw, 72px), calc((100vw - 1560px) / 2));
+  padding: 48px var(--gutter) 80px;
+  background: var(--page);
+  color: var(--ink);
+}
+
+/* :where() keeps these defaults weak, so component classes can override them. */
+:where(.landing) img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+:where(.landing) a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.landing button {
+  font: inherit;
+  cursor: pointer;
+}
+
+/* The global focus ring is white; on light surfaces it must be dark. */
+.card :focus-visible,
+.panel__sheet :focus-visible {
+  outline-color: var(--ink);
+}
+
+/* ── Pills (shared) ───────────────────────────────────────── */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 15px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 200ms, color 200ms, border-color 200ms;
+}
+
+.pill--light {
+  background: #fff;
+  color: var(--ink);
+}
+
+.pill--ghost {
+  background: rgb(255 255 255 / 0.22);
+  color: #fff;
+}
+
+.pill--ghost:hover {
+  background: rgb(255 255 255 / 0.34);
+}
+
+.pill--outline {
+  height: 34px;
+  padding: 0 20px;
+  border: 1px solid #dcd7d0;
+  background: #fff;
+  color: var(--ink);
+}
+
+.pill--outline:hover {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #fff;
+}
+
+.pill-group {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.22);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.pill-group > a,
+.pill-group > button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 24px;
+  padding: 0 9px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgb(255 255 255 / 0.88);
+  font-size: 12.5px;
+  white-space: nowrap;
+  transition: background-color 200ms, color 200ms;
+}
+
+.pill-group > a:hover,
+.pill-group > button:hover {
+  color: #fff;
+}
+
+.pill-group > button.is-active {
+  background: rgb(255 255 255 / 0.3);
+  color: #fff;
+}
+
+/* ── Coloured collection panel ────────────────────────────── */
+
+.panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 26px 28px 28px;
+  border-radius: 30px;
+  color: #fff;
+}
+
+.panel--peach {
+  --tone: #d6a283;
+  --sheet: #f8f3ee;
+  background: var(--tone);
+}
+
+.panel--sage {
+  --tone: #7d9066;
+  --sheet: #f6f5f0;
+  background: var(--tone);
+}
+
+/* Big portrait behind the headline, tinted with the panel colour. */
+.panel__backdrop {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: 520px;
+}
+
+.panel__backdrop img {
+  position: absolute;
+  inset: -10% 0 auto;
+  height: 120%; /* extra room for the parallax movement */
+  opacity: 0.6;
+  mix-blend-mode: luminosity;
+  /* Fade the photo out at the sides and bottom so it melts into the panel. */
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent),
+    linear-gradient(180deg, #000 40%, transparent 92%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent),
+    linear-gradient(180deg, #000 40%, transparent 92%);
+  mask-composite: intersect;
+}
+
+.panel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+
+.panel-nav__avatar {
+  width: 32px;
+  height: 32px;
+  margin-left: 8px;
+  border: 2px solid rgb(255 255 255 / 0.7);
+  border-radius: 50%;
+}
+
+.panel__intro {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.panel__intro h2 {
+  max-width: 620px;
+  margin: 0;
+  font-size: clamp(30px, 3.4vw, 44px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-shadow: 0 1px 10px rgb(0 0 0 / 0.08);
+}
+
+.panel__intro p {
+  max-width: 300px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: rgb(255 255 255 / 0.85);
+}
+
+.panel__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 120px;
+}
+
+.panel__categories,
+.panel__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* ── Light sheet inside the panel ─────────────────────────── */
+
+.panel__sheet {
+  margin-top: 18px;
+  padding: 18px 20px 20px;
+  border-radius: 22px;
+  background: var(--sheet);
+  color: var(--ink);
+}
+
+.sheet__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.sheet__toggle,
+.sheet__group-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+}
+
+.sheet__toggle {
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.sheet__toggle .icon,
+.sheet__group-toggle .icon {
+  transition: transform 250ms;
+}
+
+.sheet__toggle.is-open .icon {
+  transform: rotate(180deg);
+}
+
+.sheet__tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 230px;
+  height: 32px;
+  padding: 0 13px;
+  border: 1px solid #e4ded6;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--muted);
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-size: 12.5px;
+}
+
+.search:focus-within {
+  border-color: #bdb5ab;
+}
+
+.filters {
+  height: 32px;
+  padding: 0 16px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.filters.is-active {
+  background: #fff;
+  color: var(--ink);
+}
+
+.sheet__empty {
+  padding: 28px 0;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.sheet__groups {
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.sheet__group-toggle {
+  padding: 13px 0 3px;
+  color: #8f877e;
+  font-size: 12.5px;
+}
+
+.sheet__group-toggle.is-open .icon {
+  transform: rotate(180deg);
+}
+
+.sheet__group .product-grid {
+  margin: 12px 0 6px;
+}
+
+/* ── Product tile ─────────────────────────────────────────── */
+
+/* One row of 4 visible cards; extra cards scroll sideways. */
+.product-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 36px) / 4);
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: #d8d1c8 transparent;
+  padding-bottom: 6px;
+}
+
+.product-card {
+  scroll-snap-align: start;
+}
+
+.product-card {
+  display: block; /* catalog cards are links */
+}
+
+.product-card__media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1.62;
+  border-radius: 12px;
+  background: var(--soft);
+}
+
+.product-card__media img {
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.product-card:hover .product-card__media img {
+  transform: scale(1.04);
+}
+
+.product-card__code,
+.product-card__badge,
+.product-card__icon {
+  position: absolute;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 9.5px;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.product-card__code {
+  right: 8px;
+  bottom: 8px;
+  padding: 3px 8px;
+  background: rgb(0 0 0 / 0.22);
+}
+
+.product-card__badge {
+  top: 8px;
+  left: 8px;
+  padding: 3px 8px;
+  background: rgb(255 255 255 / 0.28);
+}
+
+.product-card__icon {
+  top: 8px;
+  left: 8px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  background: rgb(255 255 255 / 0.28);
+}
+
+.product-card__line {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.product-card__name {
+  margin: 2px 0 0;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.product-card__price {
+  margin-top: 7px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.product-card__soldout {
+  margin-left: 8px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* ── White cards ──────────────────────────────────────────── */
+
+.card {
+  padding: 28px;
+  border-radius: 30px;
+  background: #fff;
+}
+
+.shop-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  padding: 56px 32px 32px;
+}
+
+.shop-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.shop-item__media {
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 0.8;
+  border-radius: 16px;
+  background: var(--soft);
+}
+
+.shop-item__media {
+  position: relative;
+}
+
+.shop-item__media img {
+  position: absolute;
+  inset: -8% 0 auto;
+  height: 116%; /* room for parallax */
+  mix-blend-mode: multiply; /* white photo backgrounds blend into the grey tile */
+}
+
+.shop-item h3 {
+  margin: 14px 0 0;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.shop-item p {
+  margin: 6px 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.editorial {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 44px;
+}
+
+.editorial__media {
+  position: relative;
+  overflow: hidden;
+  min-height: 520px;
+  border-radius: 22px;
+  background: var(--soft);
+}
+
+/* Taller than its frame so the parallax movement never shows an empty edge. */
+.editorial__media img {
+  position: absolute;
+  inset: -10% 0 auto;
+  height: 120%;
+}
+
+.editorial__tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: rgb(0 0 0 / 0.22);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 11px;
+}
+
+.editorial__overlay {
+  position: absolute;
+  right: 0;
+  bottom: 28px;
+  left: 0;
+  width: max-content;
+  margin: 0 auto;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgb(255 255 255 / 0.85);
+  color: #fff;
+  font-size: clamp(28px, 2.6vw, 36px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-align: center;
+  white-space: pre-line;
+  text-shadow: 0 1px 12px rgb(0 0 0 / 0.2);
+}
+
+.editorial__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 18px 0 0;
+}
+
+.editorial__body h2 {
+  margin: 0;
+  font-size: clamp(28px, 2.7vw, 38px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+
+.editorial__body p {
+  max-width: 470px;
+  margin: 22px 0 24px;
+  color: #77706a;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.editorial__thumbs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 40px;
+}
+
+.editorial__thumb {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1.3;
+  border-radius: 16px;
+  background: var(--soft);
+}
+
+/* ── Lookbook (pinned horizontal gallery) ─────────────────── */
+
+.lookbook {
+  --tone: #7d9066;
+
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(260px, 360px) minmax(0, 1fr);
+  gap: 32px;
+  height: calc(100vh - 112px);
+  min-height: 560px;
+  max-height: 900px;
+  padding: 28px 0 28px 28px;
+  overflow: hidden;
+  border-radius: 30px;
+  background: var(--tone);
+  color: #fff;
+}
+
+/* Blurred, colour-tinted portrait behind everything (same look as the peach panel). */
+.lookbook__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.lookbook__backdrop img {
+  position: absolute;
+  inset: 0 -8%;
+  width: 116%;
+  opacity: 0.55;
+  filter: blur(2px);
+  mix-blend-mode: luminosity;
+}
+
+.lookbook__backdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(125 144 102 / 0.55), rgb(125 144 102 / 0.1) 55%, rgb(125 144 102 / 0.35));
+}
+
+.lookbook__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 26px;
+  border: 1px solid rgb(255 255 255 / 0.28);
+  border-radius: 24px;
+  background: rgb(255 255 255 / 0.12);
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+  backdrop-filter: blur(16px) saturate(130%);
+  box-shadow:
+    inset 1px 1px 0 rgb(255 255 255 / 0.35),
+    0 18px 40px rgb(20 30 10 / 0.12);
+}
+
+.lookbook__eyebrow {
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.18);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.lookbook__intro h2 {
+  margin: 22px 0 0;
+  font-size: clamp(30px, 3vw, 44px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.lookbook__text {
+  margin-top: 18px;
+  color: rgb(255 255 255 / 0.82);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.lookbook__progress {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  margin: auto 0 22px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.lookbook__bar {
+  flex: 1;
+  height: 2px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: rgb(255 255 255 / 0.25);
+}
+
+.lookbook__bar > span {
+  display: block;
+  height: 100%;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.lookbook__viewport {
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.lookbook__track {
+  display: flex;
+  gap: 18px;
+  width: max-content;
+  height: 100%;
+  margin: 0;
+  padding: 0 40px 0 0;
+  list-style: none;
+}
+
+.look {
+  position: relative;
+  flex: 0 0 auto;
+  height: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 22px;
+  background: rgb(255 255 255 / 0.1);
+}
+
+.look img {
+  position: absolute;
+  inset: 0 -8%;
+  width: 116%; /* extra room so the photo can drift sideways */
+}
+
+.look::after {
+  content: '';
+  position: absolute;
+  inset: 55% 0 0;
+  background: linear-gradient(to top, rgb(20 24 16 / 0.45), rgb(20 24 16 / 0));
+}
+
+.look__number {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 1;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.25);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  font-size: 11.5px;
+}
+
+.look__info {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  left: 14px;
+  z-index: 1;
+  padding: 16px 18px;
+  border: 1px solid rgb(255 255 255 / 0.3);
+  border-radius: 16px;
+  background: rgb(255 255 255 / 0.14);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(14px) saturate(130%);
+  box-shadow: inset 1px 1px 0 rgb(255 255 255 / 0.3);
+}
+
+.look__info h3 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.look__info p {
+  margin-top: 4px;
+  color: rgb(255 255 255 / 0.8);
+  font-size: 13px;
+}
+
+.look__info a {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.editorial__thumb img {
+  position: absolute;
+  inset: -10% 0 auto;
+  height: 120%;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+
+@media (max-width: 960px) {
+  .product-grid {
+    grid-auto-columns: calc((100% - 12px) / 2);
+  }
+
+  .shop-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .panel__intro {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .panel__toolbar {
+    margin-top: 64px;
+  }
+
+  .editorial {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .editorial__media {
+    min-height: 420px;
+  }
+
+  /* Phones/tablets: no pinning, just a swipeable row. */
+  .lookbook {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding: 24px 0 24px 24px;
+  }
+
+  .lookbook__intro {
+    margin-right: 24px;
+  }
+
+  .lookbook__progress {
+    display: none;
+  }
+
+  .lookbook__intro .pill {
+    margin-top: 22px;
+  }
+
+  .lookbook__viewport {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .lookbook__track {
+    padding-right: 24px;
+  }
+
+  .look {
+    width: min(72vw, 340px);
+    height: auto;
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 600px) {
+  .landing {
+    gap: 18px;
+    padding: 24px 12px 56px;
+  }
+
+  .panel {
+    padding: 18px 14px 14px;
+    border-radius: 24px;
+  }
+
+  .panel-nav {
+    justify-content: flex-start;
+    margin-bottom: 26px;
+  }
+
+  .panel-nav .pill-group {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .panel__categories {
+    width: 100%;
+  }
+
+  .panel__categories > .pill {
+    display: none;
+  }
+
+  .panel__categories .pill-group {
+    max-width: 100%;
+  }
+
+  .panel__sheet {
+    padding: 16px 12px;
+    border-radius: 18px;
+  }
+
+  .sheet__tools {
+    width: 100%;
+  }
+
+  .search {
+    flex: 1;
+    width: auto;
+  }
+
+  .card {
+    padding: 16px;
+    border-radius: 24px;
+  }
+
+  .shop-row {
+    gap: 22px 12px;
+    padding: 20px 14px;
+  }
+
+  .editorial__media {
+    min-height: 340px;
+  }
+}
+
+/* Big monitors: slightly larger text and spacing so the wider layout keeps its balance. */
+@media (min-width: 1680px) {
+  .pill,
+  .pill-group > a,
+  .pill-group > button,
+  .search input,
+  .filters {
+    font-size: 14px;
+  }
+
+  .pill,
+  .pill-group,
+  .search,
+  .filters {
+    height: 36px;
+  }
+
+  .panel {
+    padding: 32px 36px 36px;
+  }
+
+  .panel__intro p {
+    max-width: 340px;
+    font-size: 14px;
+  }
+
+  .panel__toolbar {
+    margin-top: 150px;
+  }
+
+  .panel__backdrop {
+    height: 600px;
+  }
+
+  .search {
+    width: 280px;
+  }
+
+  .sheet__toggle {
+    font-size: 15px;
+  }
+
+  .product-card__line {
+    font-size: 12px;
+  }
+
+  .product-card__name,
+  .sheet__group-toggle {
+    font-size: 14px;
+  }
+
+  .product-card__price {
+    font-size: 13.5px;
+  }
+
+  .shop-item h3,
+  .shop-item p {
+    font-size: 15px;
+  }
+
+  .editorial__body p {
+    max-width: 540px;
+    font-size: 14.5px;
+  }
+
+  .editorial__media {
+    min-height: 600px;
+  }
+}

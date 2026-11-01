@@ -1,0 +1,462 @@
+/* =========================================================
+   CHECKOUT, ORDER RESULT and the mock payment sheet
+   ========================================================= */
+
+.checkout,
+.order {
+  --gutter: max(clamp(16px, 3vw, 48px), calc((100vw - 1200px) / 2));
+
+  min-height: 100vh;
+  padding: 96px var(--gutter) 64px;
+  background: #e9ddce;
+  color: #1f1c19;
+}
+
+.checkout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  gap: 24px;
+  align-items: start;
+}
+
+.checkout h1 {
+  margin: 0 0 18px;
+  font-size: 36px;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+
+.checkout h2,
+.order h2 {
+  margin: 0 0 14px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.checkout--empty {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-content: center;
+  justify-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.checkout--empty p {
+  margin: 0 0 14px;
+  color: #6f665e;
+}
+
+.checkout__card,
+.checkout__summary,
+.order__card,
+.order__status {
+  padding: 22px;
+  border-radius: 24px;
+  background: rgb(255 255 255 / 0.6);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.75);
+}
+
+.checkout__card + .checkout__card {
+  margin-top: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.field span {
+  font-weight: 600;
+}
+
+.field input,
+.field select {
+  height: 46px;
+  padding: 0 14px;
+  border: 1px solid rgb(31 28 25 / 0.15);
+  border-radius: 14px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: #1f1c19;
+  outline: none;
+}
+
+.field.has-error input,
+.field.has-error select {
+  border-color: #c0392b;
+}
+
+.field select:disabled {
+  opacity: 0.55;
+}
+
+.field small {
+  color: #c0392b;
+  font-size: 12px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.ship {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgb(31 28 25 / 0.12);
+  border-radius: 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.ship + .ship {
+  margin-top: 8px;
+}
+
+.ship.is-active {
+  border-color: #1f1c19;
+  background: #fff;
+}
+
+.ship input {
+  accent-color: #1f1c19;
+}
+
+.checkout__pay-note {
+  margin: 0 0 14px;
+  color: #6f665e;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.checkout__error {
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgb(192 57 43 / 0.1);
+  color: #a3302a;
+  font-size: 13px;
+}
+
+.checkout__summary {
+  position: sticky;
+  top: 90px;
+}
+
+.checkout__summary ul,
+.order__card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sum-line {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  font-size: 13px;
+}
+
+.sum-line__media {
+  position: relative;
+}
+
+.sum-line__media img {
+  display: block;
+  width: 56px;
+  height: 70px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.sum-line__media em {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #1f1c19;
+  color: #fff;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.sum-line__name small {
+  display: block;
+  margin-top: 2px;
+  color: #8f877e;
+}
+
+.checkout dl,
+.order dl {
+  margin: 14px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid rgb(31 28 25 / 0.1);
+}
+
+.checkout dl div,
+.order dl div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.checkout dt,
+.order dt {
+  color: #6f665e;
+}
+
+.checkout dd,
+.order dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.is-total {
+  padding-top: 8px;
+  font-size: 17px !important;
+}
+
+.is-total dt {
+  color: #1f1c19 !important;
+  font-weight: 600;
+}
+
+/* ── Order result page ── */
+
+.order {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.order__status {
+  --status: #3c7a4e;
+}
+
+.order__status--pending,
+.order__status--waiting_payment {
+  --status: #c08a2f;
+}
+
+.order__status--failed,
+.order__status--cancelled {
+  --status: #c0392b;
+}
+
+.order__dot {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--status);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--status) 20%, transparent);
+}
+
+.order__id {
+  margin: 18px 0 0;
+  color: #8f877e;
+  font-size: 13px;
+}
+
+.order__status h1 {
+  margin: 6px 0 10px;
+  font-size: 34px;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+
+.order__status > p:not(.order__id) {
+  color: #6f665e;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.order__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.order__ship {
+  margin: 12px 0 0;
+  color: #6f665e;
+  font-size: 13px;
+}
+
+/* ── Mock payment sheet (stand-in for Midtrans Snap) ── */
+
+.mock-pay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.mock-pay__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(20 16 12 / 0.45);
+  animation: fade-in 250ms ease;
+}
+
+.mock-pay__sheet {
+  position: relative;
+  width: min(400px, 100%);
+  padding: 22px;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 40px 80px -30px rgb(20 16 12 / 0.5);
+  outline: none;
+  animation: sheet-in 380ms var(--retake-ease);
+}
+
+.mock-pay__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mock-pay__badge {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgb(214 162 131 / 0.2);
+  color: #9a5f3e;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.mock-pay__label {
+  margin: 16px 0 0;
+  color: #8f877e;
+  font-size: 13px;
+}
+
+.mock-pay__amount {
+  margin: 4px 0 16px;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.mock-pay__methods {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+}
+
+.mock-pay__methods legend {
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.mock-pay__method {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid rgb(31 28 25 / 0.12);
+  border-radius: 14px;
+  font-size: 13.5px;
+  cursor: pointer;
+}
+
+.mock-pay__method.is-active {
+  border-color: #1f1c19;
+}
+
+.mock-pay__method input {
+  accent-color: #1f1c19;
+}
+
+.mock-pay__alt {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.mock-pay__alt button {
+  padding: 4px;
+  border: 0;
+  background: none;
+  color: #8f877e;
+  font: inherit;
+  font-size: 12.5px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.mock-pay__note {
+  margin: 14px 0 0;
+  color: #a1978c;
+  font-size: 11.5px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+}
+
+@media (max-width: 900px) {
+  .checkout,
+  .order {
+    grid-template-columns: 1fr;
+    padding-top: 84px;
+  }
+
+  .checkout__summary {
+    position: static;
+    grid-row: 1; /* summary first on phones */
+  }
+}
+
+@media (max-width: 520px) {
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mock-pay__backdrop,
+  .mock-pay__sheet {
+    animation: none;
+  }
+}

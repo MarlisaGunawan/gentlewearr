@@ -1,0 +1,212 @@
+/* =========================================================
+   CART DRAWER + navbar badge
+   ========================================================= */
+
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  visibility: hidden;
+  transition: visibility 0s 400ms; /* stay focusable/clickable only while open */
+}
+
+.drawer.is-open {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.drawer__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(20 16 12 / 0.35);
+  opacity: 0;
+  transition: opacity 400ms;
+}
+
+.drawer.is-open .drawer__backdrop {
+  opacity: 1;
+}
+
+.drawer__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  width: min(420px, 100%);
+  height: 100%;
+  background: #f6f1ea;
+  color: #1f1c19;
+  box-shadow: -20px 0 60px -20px rgb(20 16 12 / 0.35);
+  outline: none;
+  transform: translateX(100%);
+  transition: transform 450ms var(--retake-ease);
+}
+
+.drawer.is-open .drawer__panel {
+  transform: translateX(0);
+}
+
+.drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 24px 14px;
+}
+
+.drawer__head h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.drawer__head h2 span {
+  color: #8f877e;
+  font-weight: 400;
+}
+
+.drawer__close {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(31 28 25 / 0.06);
+  color: inherit;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.drawer__shipping {
+  margin: 0 24px 6px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgb(214 162 131 / 0.18);
+  font-size: 12.5px;
+}
+
+.drawer__list {
+  flex: 1;
+  margin: 0;
+  padding: 8px 24px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.cart-line {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgb(31 28 25 / 0.08);
+}
+
+.cart-line__media img {
+  display: block;
+  width: 76px;
+  height: 96px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.cart-line__name {
+  margin: 0;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.cart-line__meta {
+  margin: 4px 0 0;
+  color: #8f877e;
+  font-size: 12.5px;
+}
+
+.cart-line__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 13.5px;
+}
+
+.cart-line__remove {
+  margin-top: 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #8f877e;
+  font: inherit;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.drawer__foot {
+  padding: 18px 24px calc(22px + env(safe-area-inset-bottom));
+  border-top: 1px solid rgb(31 28 25 / 0.08);
+}
+
+.drawer__total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.drawer__note {
+  margin: 4px 0 14px;
+  color: #8f877e;
+  font-size: 12px;
+}
+
+.drawer__empty {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  padding: 30px 24px;
+  color: #6f665e;
+  font-size: 14px;
+}
+
+.drawer__empty p {
+  margin: 0;
+}
+
+.drawer__empty-title {
+  color: #1f1c19;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.drawer__empty .btn {
+  margin-top: 10px;
+}
+
+/* Badge "pops" whenever the count changes (it re-mounts with a new key). */
+.cart__button {
+  position: relative;
+}
+
+.cart__badge {
+  animation: badge-pop 400ms var(--retake-ease);
+}
+
+@keyframes badge-pop {
+  from {
+    transform: scale(0.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer__panel,
+  .drawer__backdrop {
+    transition-duration: 1ms;
+  }
+
+  .cart__badge {
+    animation: none;
+  }
+}

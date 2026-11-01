@@ -1,0 +1,158 @@
+{
+  "id": "gwDailyRecap0001",
+  "name": "Gentle Wear · Daily sales recap",
+  "active": false,
+  "nodes": [
+    {
+      "id": "e0afbe89-51ee-5398-aaba-9d2dbd9a2011",
+      "name": "Every day at 21:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 21 * * *"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "acffd5f5-297c-57d8-8a7c-8e5e7e7b2b95",
+      "name": "Run now (manual test)",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        180
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "669f1cb6-b0d8-5c5e-8e55-b3776b680e3e",
+      "name": "Get daily numbers (Laravel)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "url": "={{ $env.GW_API_URL }}/n8n/daily-summary",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-N8N-Token",
+              "value": "={{ $env.GW_N8N_TOKEN }}"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b02a4f68-f2aa-5721-8c90-f9a727168a51",
+      "name": "Send recap (Telegram)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        500,
+        -100
+      ],
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot{{ $env.TELEGRAM_BOT_TOKEN }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ chat_id: $env.TELEGRAM_CHAT_ID, parse_mode: \"HTML\", text: `📊 <b>Daily recap ${ $('Get daily numbers (Laravel)').item.json.date }</b>\nOrders paid: <b>${ $('Get daily numbers (Laravel)').item.json.orders }</b>\nRevenue: <b>${ $('Get daily numbers (Laravel)').item.json.revenue_label }</b>\nItems sold: ${ $('Get daily numbers (Laravel)').item.json.items_sold }\nWaiting payment: ${ $('Get daily numbers (Laravel)').item.json.waiting_payment }\n\n🏆 Best sellers\n${ $('Get daily numbers (Laravel)').item.json.top_products.map(p => \"• \" + p.name + \" ×\" + p.qty).join(\"\\n\") || \"—\" }\n\n⚠️ Low stock\n${ $('Get daily numbers (Laravel)').item.json.low_stock.join(\"\\n\") || \"All good\" }` }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "8d6eef02-df46-5b6b-bb60-447d10349378",
+      "name": "Send recap (email)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        500,
+        100
+      ],
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.brevo.com/v3/smtp/email",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ sender: { name: $env.SHOP_NAME || \"Gentle Wear\", email: $env.SHOP_EMAIL }, to: [ { email: `${ $env.NOTIFY_EMAIL }` } ], subject: `Gentle Wear daily recap ${ $('Get daily numbers (Laravel)').item.json.date } — ${ $('Get daily numbers (Laravel)').item.json.revenue_label }`, htmlContent: `<div style=\"font-family:Arial,sans-serif;white-space:pre-line\">📊 <b>Daily recap ${ $('Get daily numbers (Laravel)').item.json.date }</b>\nOrders paid: <b>${ $('Get daily numbers (Laravel)').item.json.orders }</b>\nRevenue: <b>${ $('Get daily numbers (Laravel)').item.json.revenue_label }</b>\nItems sold: ${ $('Get daily numbers (Laravel)').item.json.items_sold }\nWaiting payment: ${ $('Get daily numbers (Laravel)').item.json.waiting_payment }\n\n🏆 Best sellers\n${ $('Get daily numbers (Laravel)').item.json.top_products.map(p => \"• \" + p.name + \" ×\" + p.qty).join(\"<br>\") || \"—\" }\n\n⚠️ Low stock\n${ $('Get daily numbers (Laravel)').item.json.low_stock.join(\"<br>\") || \"All good\" }</div>` }) }}",
+        "options": {},
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api-key",
+              "value": "={{ $env.BREVO_API_KEY }}"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Every day at 21:00": {
+      "main": [
+        [
+          {
+            "node": "Get daily numbers (Laravel)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run now (manual test)": {
+      "main": [
+        [
+          {
+            "node": "Get daily numbers (Laravel)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get daily numbers (Laravel)": {
+      "main": [
+        [
+          {
+            "node": "Send recap (Telegram)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send recap (email)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Jakarta"
+  },
+  "pinData": {},
+  "tags": []
+}
